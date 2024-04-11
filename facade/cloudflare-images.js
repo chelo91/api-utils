@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { cloudflareUrl, cloudflareToken } from '../config/const.config.js';
 
-const listImage = (async (page, perPage = 50) => {
+const listImage = async (page, perPage = 50) => {
     try {
         const res = await axios.get(cloudflareUrl + `?page=${page}&per_page=${perPage}`, {
             headers: {
@@ -13,24 +13,28 @@ const listImage = (async (page, perPage = 50) => {
     catch (error) {
         throw error;
     }
-});
+};
 
-const uploadImage = (async (data) => {
+const uploadImage = async (formData) => {
+
     const res = await axios({
         method: "post",
-        url: URL,
+        url: cloudflareUrl,
         headers: {
-            Authorization: "Bearer " + process.env.CF_TOKEN,
-            ...data.getHeaders(),
+            ...formData.getHeaders(),
+            Authorization: "Bearer " + cloudflareToken,
+            "Content-Type": "multipart/form-data"
         },
-        data: data,
+        data: formData
     }).then(result => {
         return result;
     }).catch(error => {
+        console.error(error);
         throw error;
     });
-    return res;
-});
+};
+
+
 /*
 const DeleteImage = (async (id) => {
     try {
