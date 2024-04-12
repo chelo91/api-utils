@@ -1,5 +1,4 @@
 import { resOk, resError, resErrorException } from '../helper/response.js';
-import formidable from "formidable";
 import fs from "fs";
 import FormData from "form-data";
 import { listImage, uploadImage } from '../facade/cloudflare-images.js';
@@ -20,10 +19,7 @@ const getPage = async (req, res) => {
 };
 const uploadBase64 = async (req, res) => {
     const { image, name } = req.app.locals;
-    //try {
-        /*const decodedImage = Buffer.from(image, 'base64');
-        const formData = new FormData();
-        formData.append("file", decodedImage, name);*/
+    try {
         // Assuming `image` is in base64 format
         const decodedImage = Buffer.from(image, 'base64');
         // Create a new FormData object
@@ -37,12 +33,43 @@ const uploadBase64 = async (req, res) => {
         } else {
             return resError(res, ret);
         }
-    /*} catch (error) {
+    } catch (error) {
         return resErrorException(res, error);
-    }*/
+    }
 };
-/*
+const uploadUrl = async (req, res) => {
+    const { image, name } = req.app.locals;
+    try {
+        const formData = new FormData();
+        formData.append("file", image, name);
+        const ret = await uploadImage(formData);
+        if (ret.data?.success) {
+            return resOk(res, ret.data.result);
+        } else {
+            return resError(res, ret);
+        }
+    } catch (error) {
+        return resErrorException(res, error);
+    }
+};
+const uploadFile = async (req, res) => {
+    const { image, name } = req.app.locals;
+    try {
+        const formData = new FormData();
+        formData.append("file", image, name);
+        const ret = await uploadImage(formData);
+        if (ret.data?.success) {
+            helper.resOk(res, ret.data.result);
+        } else {
+            helper.resError(res, ret);
+        }
+    } catch (error) {
+        helper.resError(res, error);
+    }
+};
 
+
+/*
 const UploadFile = async (req, res) => {
     const form = new formidable.IncomingForm();
     form.parse(req, async (err, fields, files) => {
@@ -63,7 +90,7 @@ const UploadFile = async (req, res) => {
         }
     });
 };
-/*
+
 const UploadUrl = async (req, res) => {
     const form = new formidable.IncomingForm();
     form.parse(req, async (err, fields, files) => {
@@ -84,10 +111,8 @@ const UploadUrl = async (req, res) => {
         }
     });
 };
-
-
-
-
+*/
+/*
 const DeleteImage = async (req, res) => {
     if (helper.CheckAuth(req, res)) {
         const form = new formidable.IncomingForm();
@@ -112,5 +137,7 @@ const DeleteImage = async (req, res) => {
 */
 export {
     getPage,
-    uploadBase64
+    uploadBase64,
+    uploadUrl,
+    uploadFile
 };

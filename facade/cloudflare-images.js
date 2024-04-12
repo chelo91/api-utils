@@ -16,25 +16,41 @@ const listImage = async (page, perPage = 50) => {
 };
 
 const uploadImage = async (formData) => {
-
-    const res = await axios({
-        method: "post",
-        url: cloudflareUrl,
-        headers: {
-            ...formData.getHeaders(),
-            Authorization: "Bearer " + cloudflareToken,
-            "Content-Type": "multipart/form-data"
-        },
-        data: formData
-    }).then(result => {
-        return result;
-    }).catch(error => {
-        console.error(error);
+    try {
+        const res = await axios.post(
+            cloudflareUrl,
+            formData,
+            {
+                headers:
+                {
+                    ...formData.getHeaders(),
+                    Authorization: "Bearer " + cloudflareToken,
+                    "Content-Type": "multipart/form-data"
+                }
+            });
+        return res;
+    } catch (error) {
         throw error;
-    });
+    }
 };
 
-
+const uploadImageUrl = async (formData) => {
+    try {
+        const res = await axios.post(
+            cloudflareUrl,
+            formData,
+            {
+                headers:
+                {
+                    Authorization: "Bearer " + cloudflareToken,
+                    "Content-Type": "multipart/form-data"
+                }
+            });
+        return res;
+    } catch (error) {
+        throw error;
+    }
+};
 /*
 const DeleteImage = (async (id) => {
     try {
@@ -49,7 +65,7 @@ const DeleteImage = (async (id) => {
         return error;
     }
 });
-
+ 
 const Test = (async () => {
     return {
         'response': "HI"
@@ -59,6 +75,7 @@ const Test = (async () => {
 export {
     listImage,
     uploadImage,
+    uploadImageUrl,
     //DeleteImage,
     //Test
 };
