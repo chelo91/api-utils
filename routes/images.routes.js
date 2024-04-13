@@ -1,24 +1,25 @@
 import express from "express";
-import { checkResource, checkImage, checkFile } from "../middleware/middleware.js";
-import { getPage, uploadBase64, uploadUrl, uploadFile } from "../controller/images.controller.js";
+import { loadFieldsAndFiles, checkImageUrl, checkImageFile, checkImageBase64 } from "../middleware/middleware.js";
+import { getPage, submitImage } from "../controller/images.controller.js";
 
 export const router = express.Router();
 
 router.get("/", getPage);
 
 router.post("/base64",
-    checkResource(["image", "name"]),
-    uploadBase64);
+    loadFieldsAndFiles(["image", "name"]),
+    checkImageBase64(["image"]),
+    submitImage);
 
 router.post("/url",
-    checkResource(["image", "name"]),
-    checkImage(["image"]),
-    uploadUrl);
+    loadFieldsAndFiles(["image", "name"]),
+    checkImageUrl(["image"]),
+    submitImage);
 
 router.post("/file",
-    checkResource(["image", "name"]),
-    checkFile(["image"]),
-    uploadFile);
+    loadFieldsAndFiles(["name"], ["image"]),
+    checkImageFile(["image"]),
+    submitImage);
 /*
 router.post("/url", async (req, res) => {
 

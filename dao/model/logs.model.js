@@ -2,16 +2,14 @@ import mongoose from 'mongoose'
 
 const logCollection = 'logs'
 const logSchema = new mongoose.Schema({
-    response: {
-        url: { type: String, required: true },
-        status: { type: Number, required: true },
-        method: { type: String, required: true },
-        message: { type: String, required: true },
-    },
     request: {
         url: { type: String, required: true },
         method: { type: String, required: true },
-        body: { type: String, required: true }
+        locals: { type: [] }
+    },
+    response: {
+        status: { type: Number, required: true },
+        message: { type: String },
     },
     date: { type: Date, default: Date.now() },
     user: {

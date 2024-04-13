@@ -64,18 +64,11 @@ const DeleteImage = (async (id) => {
     catch (error) {
         return error;
     }
-});
- 
-const Test = (async () => {
-    return {
-        'response': "HI"
-    };
 });*/
-
+ 
 export {
     listImage,
     uploadImage,
     uploadImageUrl,
     //DeleteImage,
-    //Test
 };
