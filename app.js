@@ -3,6 +3,7 @@ import cors from 'cors';
 import { port } from './config/const.config.js';
 import { auth } from './middleware/middleware.js';
 import { router as imagesRouter } from './routes/images.routes.js';
+import { router as mailsRouter } from './routes/mails.routes.js';
 import { requestLogger } from './helper/logger.js';
 const app = express();
 
@@ -25,6 +26,7 @@ app.get("/", auth, (req, res) => {
     res.send("API-Cloudflare-Images is working")
 });
 app.use("/api/images", auth, imagesRouter);
+app.use("/api/mail", auth, mailsRouter);
 
 app.listen(port, () => {
     console.log(`API-Cloudflare-Images is working in port ${port}`)

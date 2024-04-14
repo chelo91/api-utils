@@ -10,7 +10,9 @@ const env = process.env.NODE_ENV || 'development';
 const saltRounds = process.env.SALT_ROUNDS || 10;
 
 const cloudflareUrl = process.env.CLOUDFLARE_URL;
-const cloudflareToken = process.env.CLOUDFLARE_TOKEN;
+const cloudflareKey = process.env.CLOUDFLARE_KEY;
+
+const brevoKey = process.env.BREVO_KEY;
 /*const smtpHost = process.env.SMTP_HOST;
 const smtpPort = process.env.SMTP_PORT;
 const smtpUser = process.env.SMTP_USER;
@@ -27,5 +29,6 @@ console.log(`Persistencia con ${persistence}`)
 
 export {
     mongoDBName, port, url, mongoUrl, saltRounds,
-    persistence, env, cloudflareUrl, cloudflareToken/*, smtpHost, smtpPort, smtpUser, smtpPass*/
+    persistence, env, cloudflareUrl, cloudflareKey,
+    brevoKey/*, smtpHost, smtpPort, smtpUser, smtpPass*/
 }

@@ -7,7 +7,6 @@ const imageSchema = new mongoose.Schema({
     uploaded: { type: Date, default: Date.now },
     requireSignedURLs: { type: Boolean, required: true },
     variants: { type: [String], required: true },
-    variants: { type: [String], required: true },
     user: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'users',

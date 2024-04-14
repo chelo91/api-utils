@@ -1,11 +1,11 @@
 import axios from 'axios';
-import { cloudflareUrl, cloudflareToken } from '../config/const.config.js';
+import { cloudflareUrl, cloudflareKey } from '../config/const.config.js';
 
 const listImage = async (page, perPage = 50) => {
     try {
         const res = await axios.get(cloudflareUrl + `?page=${page}&per_page=${perPage}`, {
             headers: {
-                Authorization: "Bearer " + cloudflareToken
+                Authorization: "Bearer " + cloudflareKey
             }
         });
         return res;
@@ -24,7 +24,7 @@ const uploadImage = async (formData) => {
                 headers:
                 {
                     ...formData.getHeaders(),
-                    Authorization: "Bearer " + cloudflareToken,
+                    Authorization: "Bearer " + cloudflareKey,
                     "Content-Type": "multipart/form-data"
                 }
             });
@@ -42,7 +42,7 @@ const uploadImageUrl = async (formData) => {
             {
                 headers:
                 {
-                    Authorization: "Bearer " + cloudflareToken,
+                    Authorization: "Bearer " + cloudflareKey,
                     "Content-Type": "multipart/form-data"
                 }
             });
