@@ -29,7 +29,7 @@ npm start
 - [ ] Delete Image
 
 ### Endpoint Mails
-- [ ] Send email
+- [X] Send email
 
 ### Logs
 - [X] Save logs when fail upload images
