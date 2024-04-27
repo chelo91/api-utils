@@ -32,7 +32,7 @@ const loadFieldsAndFiles = (arrayFieldsNames = [], arrayFilesNames = []) => asyn
     try {
         // Verificar si los parámetros de entrada son realmente arrays
         if (!Array.isArray(arrayFieldsNames) || !Array.isArray(arrayFilesNames)) {
-            return res.status(400).json({ error: 'Array expected for fields and files names' });
+            return resError(res, 'Array expected for fields and files names');
         }
 
         // Manejar diferentes tipos de solicitudes
