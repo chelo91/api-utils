@@ -3,7 +3,7 @@ import mongoose from "mongoose";
 
 export let Users
 export let Images
-//export let Mails
+export let Mails
 export let Logs
 
 switch (persistence) {
@@ -13,12 +13,12 @@ switch (persistence) {
             console.log('DB connected 👌')
             const { default: UsersMongo } = await import('./mongo/users.mongo.js')
             const { default: ImagesMongo } = await import('./mongo/images.mongo.js')
-            //const { default: MailsMongo } = await import('./mongo/_mails.mongo.js')
+            const { default: MailsMongo } = await import('./mongo/mails.mongo.js')
             const { default: LogsMongo } = await import('./mongo/logs.mongo.js')
 
             Users = UsersMongo
             Images = ImagesMongo
-            //Mails = MailsMongo
+            Mails = MailsMongo
             Logs = LogsMongo
 
         } catch (error) {
