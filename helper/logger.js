@@ -37,7 +37,7 @@ export const respondLogger = async (res, type, status, message) => {
     if (type === 'error') {
         await LogsService.create({
             request: {
-                url: req.url,
+                url: req.baseUrl + req.url,
                 method: req.method,
                 locals: req.app.locals
             },
