@@ -18,6 +18,8 @@ const smtpPort = process.env.SMTP_PORT;
 const smtpUser = process.env.SMTP_USER;
 const smtpPass = process.env.SMTP_PASS;*/
 
+const mailSender = process.env.EMAIL_SENDER || "no-reply@chelo.xyz";
+
 if (env === 'production') {
     // Configuraciones específicas para producción
     console.log('Estamos en modo producción.');
@@ -30,5 +32,6 @@ console.log(`Persistencia con ${persistence}`)
 export {
     mongoDBName, port, url, mongoUrl, saltRounds,
     persistence, env, cloudflareUrl, cloudflareKey,
-    brevoKey/*, smtpHost, smtpPort, smtpUser, smtpPass*/
+    brevoKey,/*, smtpHost, smtpPort, smtpUser, smtpPass*/
+    mailSender
 }
