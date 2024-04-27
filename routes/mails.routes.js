@@ -1,6 +1,9 @@
 import express from "express";
+import { loadFieldsAndFiles } from '../middleware/middleware.js';
 import { sendMail } from '../controller/mails.controller.js';
 
 export const router = express.Router();
 
-router.get('/', sendMail);
+router.post('/',
+    loadFieldsAndFiles(["subject", "body", "to"]),
+    sendMail);
