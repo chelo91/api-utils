@@ -22,8 +22,8 @@ app.use(cors());
 app.use(express.json());
 app.use(requestLogger);
 
-app.get("/", auth, (req, res) => {
-    res.send("API-Cloudflare-Images is working")
+app.get("/", (req, res) => {
+    res.send("api-utils is working")
 });
 app.use("/api/images", auth, imagesRouter);
 app.use("/api/mail", auth, mailsRouter);
