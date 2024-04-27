@@ -25,6 +25,9 @@ app.use(requestLogger);
 app.get("/", (req, res) => {
     res.send("api-utils is working")
 });
+app.get("/check", auth, (req, res) => {
+    res.send("authorized")
+});
 app.use("/api/images", auth, imagesRouter);
 app.use("/api/mail", auth, mailsRouter);
 
