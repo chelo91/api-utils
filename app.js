@@ -22,12 +22,12 @@ app.use(cors());
 app.use(express.json());
 app.use(requestLogger);
 
-app.get("/", (req, res) => {
+app.get("/", auth, (req, res) => {
     res.send("api-utils is working")
 });
 app.use("/api/images", auth, imagesRouter);
 app.use("/api/mail", auth, mailsRouter);
 
 app.listen(port, () => {
-    console.log(`API-Cloudflare-Images is working in port ${port}`)
+    console.log(`api-utils is working in port ${port}`)
 })

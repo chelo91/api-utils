@@ -34,7 +34,7 @@ export const requestLogger = (req, res, next) => {
 export const respondLogger = async (res, type, status, message) => {
     const req = res.req;
     const log = `${new Date().toLocaleTimeString()} - RES ${req.ip} / ${status} / ${message}`;
-    if (type === 'error') {
+    if (type === 'error' && req.app.locals.user) {
         await LogsService.create({
             request: {
                 url: req.baseUrl + req.url,
@@ -47,7 +47,6 @@ export const respondLogger = async (res, type, status, message) => {
             },
             user: req.app.locals.user._id
         })
-
         logger.error(log)
     } else {
         logger.info(log)

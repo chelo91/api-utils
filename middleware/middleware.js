@@ -11,17 +11,20 @@ const validImageExtensions = ['.jpg', '.jpeg', '.png', '.gif', '.bmp'];
 const auth = async (req, res, next) => {
     try {
         const user = await UsersService.readOne({ ip: req.ip });
-        if (user) {
-            let token = req.headers.authorization;
-            token = token.split(' ')[1];
-            if (!bcrypt.compareSync(token, user.token)) {
-                return resNoAuth(res);
-            } else {
-                req.app.locals.user = user;
-            }
-        } else {
+        if (!user) {
             return resNoAuth(res);
         }
+        let token = req.headers.authorization;
+        if (!token) {
+            return resNoAuth(res);
+        }
+        token = token.split(' ')[1];
+        if (!bcrypt.compareSync(token, user.token)) {
+            return resNoAuth(res);
+        } else {
+            req.app.locals.user = user;
+        }
+
     } catch (error) {
         return resError(res, error.message);
     }

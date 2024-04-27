@@ -24,7 +24,7 @@ const resNoAuth = (res, message = "User unauthorized") => {
         success: false,
         message: message
     };
-    respondLogger(res, 'error', code, message);
+    respondLogger(res, 'error', 401, message);
     res.status(401).json(response);
 };
 
