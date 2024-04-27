@@ -1,25 +1,8 @@
-import mongoose from 'mongoose';
-import messageModel from '../models/messages.model.js';
+import mailModel from '../model/mails.model.js';
+import BaseMongo from './base.mongo.js';
 
-export default class Messages {
-
-    /* PROPERTIES */
+export default class MailsMongo extends BaseMongo {
     constructor() {
-    
-    }
-
-    async addMessage(message) {
-        if (message.session && message.message && message.user) {
-            message.date = Date.now();
-            const bdMessage = new messageModel(message);
-            return bdMessage.save();
-        }
-    }
-    /* CRUD */
-    async getMessages() {
-        return messageModel.find({}).lean();
-    }
-    async getMessageById(pid) {
-        return messageModel.findById(pid);
+        super(mailModel);
     }
 }
