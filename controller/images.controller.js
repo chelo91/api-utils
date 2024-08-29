@@ -28,17 +28,6 @@ const submitImage = async (req, res) => {
         if (ret.data?.success) {
             const image = ret.data.result;
             image.user = user._id;
-            /*id: { type: String, required: true },
-            filename: { type: String, required: true },
-            uploaded: { type: Date, required: true },
-            requireSignedURLs: { type: Boolean, required: true },
-            variants: { type: [String], required: true },
-            variants: { type: [String], required: true },
-            user: {
-                type: mongoose.Schema.Types.ObjectId,
-                ref: 'users',
-                required: true
-            }*/
             await ImagesService.create(image);
             return resOk(res, ret.data.result);
         } else {

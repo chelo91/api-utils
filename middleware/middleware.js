@@ -61,16 +61,7 @@ const loadFieldsAndFiles = (arrayFieldsNames = [], arrayFilesNames = []) => asyn
                 }
                 next();
             });
-       /* } else if (req.is('application/json')) {
-            // Verificar la presencia de campos requeridos en la solicitud JSON
-            for (let name of arrayFieldsNames) {
-                if (req.body[name] === undefined) {
-                    return res.status(400).json({ error: `Field '${name}' not found in JSON body` });
-                }
-                req.app.locals[name] = req.body[name];
-            }
-            next();
-        */} else {
+        } else {
             return resError(res, "Unsupported Content-Type");
         }
     } catch (error) {
